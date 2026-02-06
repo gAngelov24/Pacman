@@ -4,16 +4,20 @@
 #include <iostream>
 unsigned int MAZE_X = 224;
 unsigned int MAZE_Y = 248;
+
+
 // main game loop
 int main()
 {
-    sf::RenderWindow window(sf::VideoMode({4 * MAZE_X, 4 * MAZE_Y}), "SFML Window");
-    // const sf::Texture general_sprites();
+    /* ----- USE TO CHECK VERSION OF SFML ----- */
+    // std::cout << "Installed SFML Version: "
+    //           << SFML_VERSION_MAJOR << "."
+    //           << SFML_VERSION_MINOR << "."
+    //           << SFML_VERSION_PATCH << std::endl;
 
-    std::cout << "Installed SFML Version: "
-              << SFML_VERSION_MAJOR << "."
-              << SFML_VERSION_MINOR << "."
-              << SFML_VERSION_PATCH << std::endl;
+
+    // Init window the size of the maze
+    sf::RenderWindow window(sf::VideoMode({4 * MAZE_X, 4 * MAZE_Y}), "SFML Window");
 
     // load sprite in from sprite sheet
     sf::Texture texture;
@@ -24,6 +28,7 @@ int main()
     sf::Sprite Pacman(texture, sf::IntRect(457, 0, 16, 16));
     Pacman.setScale(4.0f, 4.0f);
 
+    // Create a sound buffer, and load the intro sound into that buffer
     sf::SoundBuffer buffer;
     if (!buffer.loadFromFile("..\\shared\\Pacman_Sprites_Sounds\\Sounds\\start.wav"))
     {
@@ -46,8 +51,24 @@ int main()
         while (window.pollEvent(event))
         {
             // Close window: exit
-            if (event.type == sf::Event::Closed)
+            if (event.type == sf::Event::Closed){
                 window.close();
+                break;
+            }
+            if (event.type == sf::Event::KeyReleased){
+                if        (event.key.code == sf::Keyboard::W || event.key.code == sf::Keyboard::Up){
+                    // Set Pac-Man Velocity up
+                     
+                } else if (event.key.code == sf::Keyboard::A || event.key.code == sf::Keyboard::Left){
+                    // Set Pac-Man Velocity up
+
+                } else if (event.key.code == sf::Keyboard::S || event.key.code == sf::Keyboard::Down){
+
+                } else if (event.key.code == sf::Keyboard::D || event.key.code == sf::Keyboard::Right){
+
+                }
+            }
+            
         }
 
         // --- Sound Looping Logic ---
